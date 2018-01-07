@@ -1,4 +1,4 @@
 /* @flow */
-import { HorizontalParallax } from './HorizontalParallax';
+import HorizontalParallax from './HorizontalParallax';
 
 export default HorizontalParallax;
