@@ -14,6 +14,8 @@
   "devDependencies": {
     "babel-jest": "22.0.4",
     "babel-preset-react-native": "4.0.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "flow-bin": "^0.63.1",
     "jest": "22.0.4",
     "react-test-renderer": "16.0.0"
   },
