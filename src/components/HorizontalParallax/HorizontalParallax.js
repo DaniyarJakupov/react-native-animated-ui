@@ -14,7 +14,8 @@ type State = {
 
 class HorizontalParallax extends Component<Props, State> {
   state = {
-    animatedScroll: new Animated.Value(0)
+    animatedScroll: new Animated.Value(0),
+    scrollEnabled: true
   };
 
   getInterpolate = (animatedScroll, i) => {
@@ -33,6 +34,10 @@ class HorizontalParallax extends Component<Props, State> {
     return <View key={i} style={[styles.separator, { left: (i - 1) * width - 2.5 }]} />;
   };
 
+  handleFocus = focused => {
+    this.setState({ scrollEnabled: !focused });
+  };
+
   render() {
     const { images } = this.props;
     return (
@@ -40,6 +45,7 @@ class HorizontalParallax extends Component<Props, State> {
         <ScrollView
           pagingEnabled
           horizontal
+          scrollEnabled={this.state.scrollEnabled}
           scrollEventThrottle={16}
           onScroll={Animated.event([
             {
@@ -57,6 +63,8 @@ class HorizontalParallax extends Component<Props, State> {
                 key={image.title}
                 {...image}
                 translateX={this.getInterpolate(this.state.animatedScroll, i, images.length)}
+                onFocused={this.handleFocus}
+                focused={!this.state.scrollEnabled}
               />
             );
           })}
