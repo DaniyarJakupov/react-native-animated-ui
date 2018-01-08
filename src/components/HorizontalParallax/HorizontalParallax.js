@@ -18,7 +18,7 @@ class HorizontalParallax extends Component<Props, State> {
   };
 
   getInterpolate = (animatedScroll, i) => {
-    // [translateX for the Image before it is swiped to, when we are at the Image, after we swiped away]
+    // [translateX for the Image before it is swiped, when we are at the Image, after we swiped away]
     const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
     const outputRange = i === 0 ? [0, 0, 150] : [-300, 0, 150];
 
