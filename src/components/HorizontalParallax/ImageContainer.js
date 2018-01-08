@@ -18,7 +18,7 @@ class ImageContainer extends Component {
   componentWillMount() {
     this.bgFadeInterpolate = this.state.scale.interpolate({
       inputRange: [0.9, 1],
-      outputRange: ['rgba(0,0,0,.3)', 'rgba(0,0,0,0)']
+      outputRange: ['rgba(0,0,0,.6)', 'rgba(0,0,0,0)']
     });
 
     this.textFade = this.state.scale.interpolate({
