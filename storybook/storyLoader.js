@@ -5,11 +5,13 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
+  require('../src/components/Button/Button.stories');
   require('../src/components/HorizontalParallax/HorizontalParallax.stories');
   
 }
 
 const stories = [
+  '../src/components/Button/Button.stories',
   '../src/components/HorizontalParallax/HorizontalParallax.stories',
   
 ];
