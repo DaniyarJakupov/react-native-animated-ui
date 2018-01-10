@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "16.0.0",
-    "react-native": "0.50.3"
+    "react-native": "0.50.3",
+    "react-native-svg": "6.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.2.15",
@@ -33,7 +34,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src"],
+      "searchDir": [
+        "./src"
+      ],
       "pattern": "**/*.stories.js",
       "outputFile": "./storybook/storyLoader.js"
     }
