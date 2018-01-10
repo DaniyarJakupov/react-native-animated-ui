@@ -14,10 +14,11 @@ FlipCardStory.addDecorator(withKnobs);
 FlipCardStory.add('default', () => {
   return (
     <FlipCard
-      text="Front"
-      backText="Back"
+      text="This is front side. To flip card, just press"
+      backText="Looks good, doesn't it?"
       color="cornflowerblue"
       backColor="rebeccapurple"
+      fontSize={20}
     />
   );
 });

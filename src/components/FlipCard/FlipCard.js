@@ -7,7 +7,7 @@ type Props = {
   backText?: string,
   color?: string,
   backColor?: string,
-  onPress?: Function
+  fontSize?: number
 };
 type State = {};
 
@@ -52,7 +52,7 @@ class FlipCard extends Component<Props, State> {
       backText = 'Back',
       color = '#333',
       backColor = 'lightblue',
-      onPress
+      fontSize = 14
     } = this.props;
 
     const frontAnimatedStyle = {
@@ -66,7 +66,7 @@ class FlipCard extends Component<Props, State> {
       <TouchableWithoutFeedback onPress={this.flipCard}>
         <View>
           <Animated.View style={[styles.flipCard, frontAnimatedStyle, { backgroundColor: color }]}>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={[styles.text, { fontSize }]}>{text}</Text>
           </Animated.View>
           <Animated.View
             style={[
@@ -76,7 +76,7 @@ class FlipCard extends Component<Props, State> {
               { backgroundColor: backColor }
             ]}
           >
-            <Text style={styles.text}>{backText}</Text>
+            <Text style={[styles.text, { fontSize }]}>{backText}</Text>
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>
@@ -86,18 +86,27 @@ class FlipCard extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   flipCard: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backfaceVisibility: 'hidden'
+    backfaceVisibility: 'hidden',
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: '#000',
+    elevation: 2
   },
   flipCardBack: {
     position: 'absolute',
     top: 0
   },
   text: {
-    color: '#fff'
+    color: '#fff',
+    textAlign: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 10
   }
 });
 
