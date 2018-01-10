@@ -18,7 +18,6 @@ FlipCardStory.add('default', () => {
       backText="Back"
       color="cornflowerblue"
       backColor="rebeccapurple"
-      onPress={action('clicked-FlipCard')}
     />
   );
 });
