@@ -55,7 +55,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#000',
+    elevation: 2
   },
   text: {
     color: '#fff'
