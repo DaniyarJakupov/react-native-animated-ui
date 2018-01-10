@@ -7,6 +7,7 @@
 function loadStories() {
   require('../src/components/Button/Button.stories.js');
   require('../src/components/FlipCard/FlipCard.stories.js');
+  require('../src/components/Heart/Heart.stories.js');
   require('../src/components/HorizontalParallax/HorizontalParallax.stories.js');
   
 }
@@ -14,6 +15,7 @@ function loadStories() {
 const stories = [
   '../src/components/Button/Button.stories.js',
   '../src/components/FlipCard/FlipCard.stories.js',
+  '../src/components/Heart/Heart.stories.js',
   '../src/components/HorizontalParallax/HorizontalParallax.stories.js',
   
 ];
