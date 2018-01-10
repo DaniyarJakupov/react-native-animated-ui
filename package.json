@@ -10,9 +10,11 @@
     "storybook": "storybook start -p 7007"
   },
   "dependencies": {
+    "ramda": "^0.25.0",
     "react": "16.0.0",
     "react-native": "0.50.3",
-    "react-native-svg": "6.0.0"
+    "react-native-svg": "6.0.0",
+    "styled-components": "^2.4.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.2.15",
