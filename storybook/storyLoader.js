@@ -6,12 +6,14 @@
 
 function loadStories() {
   require('../src/components/Button/Button.stories.js');
+  require('../src/components/FlipCard/FlipCard.stories.js');
   require('../src/components/HorizontalParallax/HorizontalParallax.stories.js');
   
 }
 
 const stories = [
   '../src/components/Button/Button.stories.js',
+  '../src/components/FlipCard/FlipCard.stories.js',
   '../src/components/HorizontalParallax/HorizontalParallax.stories.js',
   
 ];
