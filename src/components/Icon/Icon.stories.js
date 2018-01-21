@@ -14,7 +14,7 @@ IconStory.addDecorator(getStory => <CenterView>{getStory()}</CenterView>);
 IconStory.addDecorator(withKnobs);
 IconStory.add('default', () => {
   return (
-    <Icon onPress={action('clicked-button')} color={Color.RED} size={80} svgPath={IconPath.STAR} />
+    <Icon onPress={action('clicked-icon')} color={Color.RED} size={40} svgPath={IconPath.STAR} />
   );
 });
 
