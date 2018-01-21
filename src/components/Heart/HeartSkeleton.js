@@ -4,10 +4,11 @@ import { View, StyleSheet, Animated } from 'react-native';
 
 type Props = {
   filled?: boolean,
+  explosion?: boolean,
   color?: string
 };
 
-const Heart = ({ filled, color = '#e31745' }: Props) => {
+const Heart = ({ filled, color = '#e31745', style, explosion }: Props) => {
   const centerNonFilled = (
     <View style={[StyleSheet.absoluteFill, styles.fit]}>
       <View style={[styles.leftHeart, styles.heartShape, styles.emptyFill]} />
@@ -15,12 +16,12 @@ const Heart = ({ filled, color = '#e31745' }: Props) => {
     </View>
   );
   const fillStyle = filled ? { backgroundColor: color } : styles.empty;
-
+  const explosionStyle = explosion ? { backgroundColor: color } : null;
   return (
-    <Animated.View style={[styles.heart]}>
-      <View style={[styles.leftHeart, styles.heartShape, fillStyle]} />
-      <View style={[styles.rightHeart, styles.heartShape, fillStyle]} />
-      {!filled && centerNonFilled}
+    <Animated.View style={[styles.heart, style]}>
+      <View style={[styles.leftHeart, styles.heartShape, fillStyle, explosionStyle]} />
+      <View style={[styles.rightHeart, styles.heartShape, fillStyle, explosionStyle]} />
+      {!filled && !explosion ? centerNonFilled : null}
     </Animated.View>
   );
 };
