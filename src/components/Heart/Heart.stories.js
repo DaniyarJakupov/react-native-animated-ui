@@ -18,7 +18,7 @@ HeartStory.addDecorator(withKnobs);
 HeartStory.add('default', () => {
   return (
     <Heart
-      color={select('color', colorOptions, Color.GREEN)}
+      color={select('color', colorOptions, Color.PURPLE)}
       explosion={boolean('explosion', true)}
       onPress={action('clicked-Heart')}
     />

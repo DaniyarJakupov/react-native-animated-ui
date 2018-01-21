@@ -7,7 +7,7 @@ const Color = Object.freeze({
   GREEN: '#96ff00',
   GRAY: '#404040',
   LIGHT_GRAY: '#8c8c8c',
-  TRANSPARENT: 'transparent'
+  PURPLE: 'rebeccapurple'
 });
 
 export { Color };
