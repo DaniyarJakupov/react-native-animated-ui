@@ -39,6 +39,7 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 
 - [x] Button
+![Button](https://media.giphy.com/media/xThta8fIVfwiTNa3eM/giphy.gif)
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
@@ -47,6 +48,7 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 | `onPress`       | `function`     |         | 
 
 - [x] FlipCard
+![FlipCard](https://media.giphy.com/media/26DNf5QfRsmnHaP96/giphy.gif)
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
@@ -57,7 +59,7 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 | `backColor`       | `string`     |    `rebeccapurple`     | 
 
 - [x] Heart
-
+![Heart](https://media.giphy.com/media/l4pTsjrBklIE3iZAQ/giphy.gif)
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
@@ -67,6 +69,8 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 
 - [x] Icon
+
+![Icon](https://media.giphy.com/media/l4pTf2pUrxEpb78kM/giphy.gif)
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
@@ -78,6 +82,8 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 
 - [x] HorizontalParallax
+
+![HorizontalParallax](https://media.giphy.com/media/xThtaxiq4lBlCN5TC8/giphy.gif)
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
