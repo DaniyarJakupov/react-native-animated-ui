@@ -83,4 +83,4 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 ## Credits
 
-- 
+- [Jason Brown](https://egghead.io/instructors/jason-brown-20a6bf03-254a-428c-9984-dca76cc84f32) 
