@@ -12,7 +12,9 @@ const ActionButtonStory = storiesOf('ActionButton', module);
 ActionButtonStory.addDecorator(getStory => <CenterView>{getStory()}</CenterView>);
 ActionButtonStory.addDecorator(withKnobs);
 ActionButtonStory.add('default', () => {
-  return <ActionButton text="Press" color="cornflowerblue" onPress={action('clicked-button')} />;
+  return (
+    <ActionButton color="rgb(24,214,255)" fabColor="#9439FF" onPress={action('clicked-button')} />
+  );
 });
 
 export default ActionButtonStory;
