@@ -1,9 +1,6 @@
 # react-native-animated-ui
 Animated UI components for react-native
 
-## Prerequisites
-This library is bootstrapped with React Native CLI. You have to install CLI locally: [instructions](https://facebook.github.io/react-native/docs/getting-started.html#installing-dependencies).
-
 ## Usage
 1. Install library from npm
 ```
