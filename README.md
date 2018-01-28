@@ -29,6 +29,8 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 - [x] ActionButton
 
+![ActionButton](https://media.giphy.com/media/xThta0poHUdGihBCbm/giphy.gif)
+
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
 | `text`       | `string`     |         | 
