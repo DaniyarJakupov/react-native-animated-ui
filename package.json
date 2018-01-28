@@ -2,7 +2,7 @@
   "name": "react-native-animated-ui",
   "description": "Animated UI components for react-native",
   "repository": "https://github.com/DaniyarJakupov/react-native-animated-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "src/index.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -41,7 +41,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src"],
+      "searchDir": [
+        "./src"
+      ],
       "pattern": "**/*.stories.js",
       "outputFile": "./storybook/storyLoader.js"
     }
