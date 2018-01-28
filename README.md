@@ -18,7 +18,7 @@ react-native link
 
 Start using the components by importing them
 ```javascript
-import { Button, ActionButton } from '@citydropz/citydropz-ui';
+import { Button, ActionButton } from 'react-native-animated-ui';
 
 <Button />
 
