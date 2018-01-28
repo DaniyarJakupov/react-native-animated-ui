@@ -28,19 +28,26 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 ## Components included:
 
 - [x] ActionButton
+
+| Prop              | Type       | Default | Note                                                                                                       |
+| ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `text`       | `string`     |         | 
+| `color`       | `string`     |         | 
+| `onPress`       | `function`     |         | 
+
+
 - [x] Button
+
+| Prop              | Type       | Default | Note                                                                                                       |
+| ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| `text`       | `string`     |    `Press`     | 
+| `color`       | `string`     |    `#333`     | 
+| `onPress`       | `function`     |         | 
+
 - [x] FlipCard
 - [x] Heart
 - [x] Icon
 - [x] HorizontalParallax
-
-## Props
-
-| Prop              | Type       | Default | Note                                                                                                       |
-| ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `explosion`       | `bool`     |    false     | Add explosion effect to the Button
-
-
 
 ## Credits
 
