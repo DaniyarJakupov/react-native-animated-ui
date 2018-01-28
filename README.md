@@ -10,26 +10,12 @@ This library is bootstrapped with React Native CLI. You have to install CLI loca
 yarn add react-native-animated-ui
 ```
 
-2. Link native code for react-native-svg
+2. Link native code 
 ```
-react-native link react-native-svg
-```
-If you get an error `Command 'link' unrecognized`, delete node_modules folder and install dependencies again:
-```
-rm -rf node_modules
-yarn
+react-native link 
 ```
 
-3. `react-native link` adds all targets to the ios target, we need to fix it:
-
-    ![Guide](https://i.imgur.com/FqQIbew.png)
-
-    * 4.1. Open .xcodeproj of your project in Xcode
-    * 4.2. Click on your main project file (the one that represents the .xcodeproj) select Build Phases
-    * 4.3. Remove the libRNSVG-tvOS.a file from Link Binary With Libraries under Build Phases.
-    * 4.4. Don't close Xcode yet, go to `step 5`
-
-4. Now you can import components & utils to your react-native app:
+3. Now you can import components to your react-native app:
 ```javascript
 import { Button, ActionButton } from '@citydropz/citydropz-ui';
 ```
@@ -38,7 +24,7 @@ import { Button, ActionButton } from '@citydropz/citydropz-ui';
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `explostion`       | `bool`     |    false     | Add explosion effect to the Button
+| `explosion`       | `bool`     |    false     | Add explosion effect to the Button
 
 
 
