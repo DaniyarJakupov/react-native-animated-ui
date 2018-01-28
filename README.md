@@ -1,7 +1,9 @@
 # react-native-animated-ui
 Animated UI components for react-native
 
-## Usage
+## Get Started
+
+### Installation
 1. Install library from npm
 ```
 yarn add react-native-animated-ui
@@ -12,10 +14,25 @@ yarn add react-native-animated-ui
 react-native link 
 ```
 
-3. Now you can import components to your react-native app:
+### Usage
+
+Start using the components by importing them
 ```javascript
 import { Button, ActionButton } from '@citydropz/citydropz-ui';
+
+<Button />
+
 ```
+
+
+## Components included:
+
+- [x] ActionButton
+- [x] Button
+- [x] FlipCard
+- [x] Heart
+- [x] Icon
+- [x] HorizontalParallax
 
 ## Props
 
