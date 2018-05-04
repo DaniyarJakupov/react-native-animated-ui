@@ -11,6 +11,7 @@ function loadStories() {
   require('../src/components/Heart/Heart.stories.js');
   require('../src/components/HorizontalParallax/HorizontalParallax.stories.js');
   require('../src/components/Icon/Icon.stories.js');
+  require('../src/components/SwipeDeck/SwipeDeck.stories.js');
   
 }
 
@@ -21,6 +22,7 @@ const stories = [
   '../src/components/Heart/Heart.stories.js',
   '../src/components/HorizontalParallax/HorizontalParallax.stories.js',
   '../src/components/Icon/Icon.stories.js',
+  '../src/components/SwipeDeck/SwipeDeck.stories.js',
   
 ];
 
