@@ -1,222 +1,191 @@
-import React, { Component } from 'react';
-import { View, Animated, Image, StyleSheet, Dimensions, PanResponder, Text } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
-const SWIPE_THRESHOLD = 0.4 * width;
-const SWIPE_OUT_DURATION = 250;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SWIPE_THRESHOLD = 0.5 * SCREEN_WIDTH;
 
-const DATA = [
-  {
-    image: 'https://i.imgur.com/qFZmyFD.jpg',
-    title: 'Theater'
-  },
-  {
-    image: 'https://i.imgur.com/sjFFcOF.jpg',
-    title: 'Nature'
-  },
-  {
-    image: 'https://i.imgur.com/m6Z5NAw.jpg',
-    title: 'Bar'
-  },
-  {
-    image: 'https://i.imgur.com/PY56L1n.jpg',
-    title: 'Park'
-  }
-];
-
-class SwipeDeck extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.position = new Animated.ValueXY();
     this.state = {
       currentIndex: 0
     };
 
-    this.position = new Animated.ValueXY();
-
-    this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gesture) => {
-        this.position.setValue({ x: gesture.dx, y: 0 });
+    this.PanResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onPanResponderMove: (evt, gestureState) => {
+        this.position.setValue({ x: gestureState.dx, y: 0 });
       },
-      onPanResponderRelease: (event, gesture) => {
-        if (gesture.dx > SWIPE_THRESHOLD) {
-          this.forceSwipe('right');
-        } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          this.forceSwipe('left');
+      onPanResponderRelease: (evt, gestureState) => {
+        if (gestureState.dx > SWIPE_THRESHOLD) {
+          Animated.spring(this.position, {
+            toValue: { x: SCREEN_WIDTH + 100, y: 0 }
+          }).start(() => {
+            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
+              this.position.setValue({ x: 0, y: 0 });
+            });
+          });
+        } else if (gestureState.dx < -SWIPE_THRESHOLD) {
+          Animated.spring(this.position, {
+            toValue: { x: -SCREEN_WIDTH - 100, y: 0 }
+          }).start(() => {
+            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
+              this.position.setValue({ x: 0, y: 0 });
+            });
+          });
         } else {
-          this.resetPosition();
+          Animated.spring(this.position, {
+            toValue: { x: 0, y: 0 },
+            friction: 4
+          }).start();
         }
       }
     });
 
     this.rotate = this.position.x.interpolate({
-      inputRange: [-width / 2, 0, width / 2],
-      outputRange: ['-20deg', '0deg', '20deg'],
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: ['-10deg', '0deg', '10deg'],
       extrapolate: 'clamp'
     });
+
+    this.rotateAndTranslate = {
+      transform: [
+        {
+          rotate: this.rotate
+        },
+        ...this.position.getTranslateTransform()
+      ]
+    };
+
     this.likeOpacity = this.position.x.interpolate({
-      inputRange: [-width / 2, 0, width / 2],
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
       outputRange: [0, 0, 1],
       extrapolate: 'clamp'
     });
     this.dislikeOpacity = this.position.x.interpolate({
-      inputRange: [-width / 2, 0, width / 2],
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
       outputRange: [1, 0, 0],
       extrapolate: 'clamp'
     });
 
     this.nextCardOpacity = this.position.x.interpolate({
-      inputRange: [-width / 2, 0, width / 2],
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
       outputRange: [1, 0, 1],
       extrapolate: 'clamp'
     });
     this.nextCardScale = this.position.x.interpolate({
-      inputRange: [-width / 2, 0, width / 2],
-      outputRange: [1, 0, 1],
+      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+      outputRange: [1, 0.8, 1],
       extrapolate: 'clamp'
     });
   }
 
-  onSwipeComplete = () => {
-    this.setState(
-      prevState => ({ currentIndex: prevState.currentIndex + 1 }),
-      () => {
-        this.position.setValue({ x: 0, y: 0 });
-      }
-    );
-  };
-
-  forceSwipe = direction => {
-    const x = direction === 'right' ? width : -width;
-    Animated.timing(this.position, {
-      toValue: { x, y: 0 },
-      duration: SWIPE_OUT_DURATION
-    }).start(() => this.onSwipeComplete(direction));
-  };
-
-  resetPosition = () => {
-    Animated.spring(this.position, {
-      toValue: { x: 0, y: 0 },
-      friction: 4
-    }).start();
-  };
-
-  swipeCard = () => ({
-    ...this.position.getLayout(),
-    transform: [{ rotate: this.rotate }]
-  });
-
   renderCards = () => {
-    const cards = DATA.map((card, i) => {
-      if (i < this.state.currentIndex) {
-        return null;
-      }
-      if (i === this.state.currentIndex) {
+    return this.props.data
+      .map((item, i) => {
+        if (i < this.state.currentIndex) {
+          return null;
+        } else if (i == this.state.currentIndex) {
+          return (
+            <Animated.View
+              {...this.PanResponder.panHandlers}
+              key={item.id}
+              style={[this.rotateAndTranslate, styles.imageWrapper]}
+            >
+              <Animated.View style={[styles.likeTextWrapper, { opacity: this.likeOpacity }]}>
+                <Text style={styles.likeText}>LIKE</Text>
+              </Animated.View>
+
+              <Animated.View style={[styles.dislikeTextWrapper, { opacity: this.dislikeOpacity }]}>
+                <Text style={styles.dislikeText}>NOPE</Text>
+              </Animated.View>
+
+              <Image style={styles.image} source={{ uri: item.uri }} />
+            </Animated.View>
+          );
+        }
         return (
           <Animated.View
-            {...this.panResponder.panHandlers}
-            style={[styles.animatedContent, this.swipeCard()]}
-            key={card.title}
+            key={item.id}
+            style={[
+              styles.imageWrapper,
+              {
+                opacity: this.nextCardOpacity,
+                transform: [{ scale: this.nextCardScale }]
+              }
+            ]}
           >
-            <Animated.View style={[styles.textWrapperRight, { opacity: this.likeOpacity }]}>
-              <Text style={[styles.text]}>LIKE</Text>
+            <Animated.View style={styles.likeTextWrapper}>
+              <Text style={styles.likeText}>LIKE</Text>
             </Animated.View>
 
-            <Animated.View style={[styles.textWrapperLeft, { opacity: this.dislikeOpacity }]}>
-              <Text
-                style={[
-                  styles.text,
-                  {
-                    color: 'crimson',
-                    borderColor: 'crimson'
-                  }
-                ]}
-              >
-                NOPE
-              </Text>
+            <Animated.View style={styles.dislikeTextWrapper}>
+              <Text style={styles.dislikeText}>NOPE</Text>
             </Animated.View>
-            <Image source={{ uri: card.image }} style={styles.image} resizeMode="cover" />
+
+            <Image style={styles.image} source={{ uri: item.uri }} />
           </Animated.View>
         );
-      }
-
-      return (
-        <Animated.View
-          style={[
-            styles.animatedContent,
-            { opacity: this.nextCardOpacity, transform: [{ scale: this.nextCardScale }] }
-          ]}
-          key={card.title}
-        >
-          <Image source={{ uri: card.image }} style={styles.image} resizeMode="cover" />
-        </Animated.View>
-      );
-    });
-
-    return cards.reverse();
+      })
+      .reverse();
   };
 
   render() {
     return (
-      <View style={styles.wrapper}>
-        <View style={styles.header} />
-        <View style={styles.content}>{this.renderCards()}</View>
-        <View style={styles.footer} />
+      <View style={{ flex: 1 }}>
+        <View style={{ height: 60 }} />
+        <View style={{ flex: 1 }}>{this.renderCards()}</View>
+        <View style={{ height: 60 }} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1
+  image: {
+    flex: 1,
+    height: null,
+    width: null,
+    resizeMode: 'cover',
+    borderRadius: 20
   },
-  header: {
-    height: 60
-  },
-  content: {
-    flex: 1
-  },
-  footer: {
-    height: 60
-  },
-  animatedContent: {
-    height: height - 120,
-    width,
+  imageWrapper: {
+    height: SCREEN_HEIGHT - 120,
+    width: SCREEN_WIDTH,
     padding: 10,
     position: 'absolute'
   },
-  image: {
-    flex: 1,
-    width: null,
-    height: null,
-    borderRadius: 20
-  },
-  text: {
+  dislikeText: {
     borderWidth: 1,
-    color: 'lightgreen',
-    borderColor: 'lightgreen',
-    fontSize: 30,
-    fontWeight: 'bold',
+    borderColor: 'crimson',
+    color: 'crimson',
+    fontSize: 32,
+    fontWeight: '800',
     padding: 10
   },
-  textWrapperRight: {
+  dislikeTextWrapper: {
+    opacity: 0,
     position: 'absolute',
-    backgroundColor: 'transparent',
     top: 50,
-    left: 40,
-    zIndex: 999,
-    transform: [{ rotate: '-30deg' }]
+    right: 10,
+    zIndex: 1000
   },
-  textWrapperLeft: {
+  likeText: {
+    borderWidth: 1,
+    borderColor: 'lightgreen',
+    color: 'lightgreen',
+    fontSize: 32,
+    fontWeight: '800',
+    padding: 10
+  },
+  likeTextWrapper: {
+    opacity: 0,
     position: 'absolute',
-    backgroundColor: 'transparent',
     top: 50,
-    right: 40,
-    zIndex: 999,
-    transform: [{ rotate: '30deg' }]
+    left: 10,
+    zIndex: 1000
   }
 });
-
-export default SwipeDeck;
