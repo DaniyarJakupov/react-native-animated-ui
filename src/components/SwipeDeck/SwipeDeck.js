@@ -1,18 +1,27 @@
-import React from 'react';
+// @flow
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const SWIPE_THRESHOLD = 0.5 * SCREEN_WIDTH;
+const SWIPE_THRESHOLD = 0.4 * SCREEN_WIDTH;
 
-export default class App extends React.Component {
-  constructor(props) {
+type State = {
+  currentIndex: number
+};
+type Props = {
+  data: Array<{ id: string, uri: string }>,
+  renderNoMoreCards?: Function
+};
+
+export default class App extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
-    this.position = new Animated.ValueXY();
     this.state = {
       currentIndex: 0
     };
+    this.position = new Animated.ValueXY();
 
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -84,6 +93,17 @@ export default class App extends React.Component {
   }
 
   renderCards = () => {
+    if (this.state.currentIndex >= this.props.data.length) {
+      if (this.props.renderNoMoreCards) {
+        return this.props.renderNoMoreCards();
+      }
+      return (
+        <View style={[styles.noMoreWrapper]}>
+          <Text>No more cards</Text>
+        </View>
+      );
+    }
+
     return this.props.data
       .map((item, i) => {
         if (i < this.state.currentIndex) {
@@ -187,5 +207,15 @@ const styles = StyleSheet.create({
     top: 50,
     left: 10,
     zIndex: 1000
+  },
+  noMoreWrapper: {
+    height: SCREEN_HEIGHT - 120,
+    width: SCREEN_WIDTH * 0.9,
+    borderRadius: 20,
+    borderWidth: 4,
+    borderColor: 'lightgrey',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center'
   }
 });
