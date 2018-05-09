@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Animated,
-  Image,
-  StyleSheet,
-  Dimensions,
-  PanResponder,
-  LayoutAnimation,
-  UIManager
-} from 'react-native';
+import { View, Animated, Image, StyleSheet, Dimensions, PanResponder, Text } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const SWIPE_THRESHOLD = 0.3 * width;
+const SWIPE_THRESHOLD = 0.4 * width;
 const SWIPE_OUT_DURATION = 250;
 
 const DATA = [
@@ -50,60 +41,71 @@ class SwipeDeck extends Component {
       },
       onPanResponderRelease: (event, gesture) => {
         if (gesture.dx > SWIPE_THRESHOLD) {
-          // this.forceSwipe('right');
-          console.log('right');
+          this.forceSwipe('right');
         } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          // this.forceSwipe('left');
-          console.log('left');
+          this.forceSwipe('left');
         } else {
           this.resetPosition();
         }
       }
     });
+
+    this.rotate = this.position.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: ['-20deg', '0deg', '20deg'],
+      extrapolate: 'clamp'
+    });
+    this.likeOpacity = this.position.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [0, 0, 1],
+      extrapolate: 'clamp'
+    });
+    this.dislikeOpacity = this.position.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [1, 0, 0],
+      extrapolate: 'clamp'
+    });
+
+    this.nextCardOpacity = this.position.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [1, 0, 1],
+      extrapolate: 'clamp'
+    });
+    this.nextCardScale = this.position.x.interpolate({
+      inputRange: [-width / 2, 0, width / 2],
+      outputRange: [1, 0, 1],
+      extrapolate: 'clamp'
+    });
   }
 
-  componentDidUpdate() {
-    UIManager.setLayoutAnimationEnabledExperimental &&
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    LayoutAnimation.spring();
-  }
+  onSwipeComplete = () => {
+    this.setState(
+      prevState => ({ currentIndex: prevState.currentIndex + 1 }),
+      () => {
+        this.position.setValue({ x: 0, y: 0 });
+      }
+    );
+  };
 
-  onSwipeComplete(direction) {
-    const { onSwipeLeft, onSwipeRight, data } = this.props;
-    const item = data[this.state.index];
-
-    direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
-    this.position.setValue({ x: 0, y: 0 });
-    this.setState(prevState => ({
-      currentIndex: prevState.currentIndex + 1
-    }));
-  }
-
-  forceSwipe(direction) {
+  forceSwipe = direction => {
     const x = direction === 'right' ? width : -width;
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
       duration: SWIPE_OUT_DURATION
     }).start(() => this.onSwipeComplete(direction));
-  }
+  };
 
-  resetPosition() {
+  resetPosition = () => {
     Animated.spring(this.position, {
-      toValue: { x: 0, y: 0 }
+      toValue: { x: 0, y: 0 },
+      friction: 4
     }).start();
-  }
+  };
 
-  getCardStyle() {
-    const rotate = this.position.x.interpolate({
-      inputRange: [-width * 1.5, 0, width * 1.5],
-      outputRange: ['-120deg', '0deg', '120deg']
-    });
-
-    return {
-      ...this.position.getLayout(),
-      transform: [{ rotate }]
-    };
-  }
+  swipeCard = () => ({
+    ...this.position.getLayout(),
+    transform: [{ rotate: this.rotate }]
+  });
 
   renderCards = () => {
     const cards = DATA.map((card, i) => {
@@ -114,16 +116,39 @@ class SwipeDeck extends Component {
         return (
           <Animated.View
             {...this.panResponder.panHandlers}
-            style={[styles.animatedContent, this.getCardStyle()]}
+            style={[styles.animatedContent, this.swipeCard()]}
             key={card.title}
           >
+            <Animated.View style={[styles.textWrapperRight, { opacity: this.likeOpacity }]}>
+              <Text style={[styles.text]}>LIKE</Text>
+            </Animated.View>
+
+            <Animated.View style={[styles.textWrapperLeft, { opacity: this.dislikeOpacity }]}>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    color: 'crimson',
+                    borderColor: 'crimson'
+                  }
+                ]}
+              >
+                NOPE
+              </Text>
+            </Animated.View>
             <Image source={{ uri: card.image }} style={styles.image} resizeMode="cover" />
           </Animated.View>
         );
       }
 
       return (
-        <Animated.View style={[styles.animatedContent]} key={card.title}>
+        <Animated.View
+          style={[
+            styles.animatedContent,
+            { opacity: this.nextCardOpacity, transform: [{ scale: this.nextCardScale }] }
+          ]}
+          key={card.title}
+        >
           <Image source={{ uri: card.image }} style={styles.image} resizeMode="cover" />
         </Animated.View>
       );
@@ -167,6 +192,30 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     borderRadius: 20
+  },
+  text: {
+    borderWidth: 1,
+    color: 'lightgreen',
+    borderColor: 'lightgreen',
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 10
+  },
+  textWrapperRight: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    top: 50,
+    left: 40,
+    zIndex: 999,
+    transform: [{ rotate: '-30deg' }]
+  },
+  textWrapperLeft: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    top: 50,
+    right: 40,
+    zIndex: 999,
+    transform: [{ rotate: '30deg' }]
   }
 });
 
