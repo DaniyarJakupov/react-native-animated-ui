@@ -66,7 +66,7 @@ import { Button, ActionButton } from 'react-native-animated-ui';
 
 | Prop              | Type       | Default | Note                                                                                                       |
 | ----------------- | ---------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `explostion`       | `boolean`     |  `false`       | 
+| `explosion`       | `boolean`     |  `false`       | 
 | `color`       | `string`     |      `crimson`   | 
 | `onPress`       | `function`     |         | 
 
