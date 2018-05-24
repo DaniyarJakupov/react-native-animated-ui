@@ -10,13 +10,18 @@ type Props = {
   svgPath?: string,
   viewBox?: string,
   size?: number,
-  color?: string
+  color?: string,
+  disabled?: boolean
 };
 type State = {
   scale: any
 };
 
 export default class Icon extends Component<Props, State> {
+  static defaultProps = {
+    disabled: false
+  };
+
   state = {
     scale: new Animated.Value(0)
   };
@@ -48,7 +53,10 @@ export default class Icon extends Component<Props, State> {
     };
 
     return (
-      <TouchableWithoutFeedback onPress={onPress} onPressIn={this.handlePressIn}>
+      <TouchableWithoutFeedback
+        onPressIn={onPress}
+        onPress={this.props.disabled ? null : this.handlePressIn}
+      >
         <Animated.View style={animatedStyle}>
           <Svg style={{ width: size, height: size, alignSelf: 'center' }} viewBox={viewBox}>
             <Path d={svgPath} fill={color} stroke={color} />
