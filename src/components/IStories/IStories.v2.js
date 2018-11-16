@@ -31,7 +31,7 @@ class IStories extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.stories = props.stories.map(() => React.createRef);
+    this.stories = props.stories.map(() => React.createRef());
   }
 
   componentDidMount() {
