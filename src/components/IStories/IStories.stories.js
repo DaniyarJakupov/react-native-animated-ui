@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react-native';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import IStories from './IStories.v1';
+import IStoriesV3 from './IStories.v3';
 
 const STORIES = [
   {
@@ -27,7 +28,7 @@ const STORIES = [
 const IStoriesStory = storiesOf('IStories', module);
 IStoriesStory.addDecorator(withKnobs);
 IStoriesStory.add('default', () => {
-  return <IStories stories={STORIES} />;
+  return <IStoriesV3 stories={STORIES} />;
 });
 
 export default IStoriesStory;
