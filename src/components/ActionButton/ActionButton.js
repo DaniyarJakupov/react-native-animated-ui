@@ -39,7 +39,8 @@ export default class ActionButton extends Component<Props, State> {
     const flyouts = this.state.fabs.map((value, i) => {
       return Animated.spring(value, {
         toValue: (i + 1) * -90 * toValue,
-        friction: 5
+        friction: 5,
+        useNativeDriver: true
       });
     });
 
