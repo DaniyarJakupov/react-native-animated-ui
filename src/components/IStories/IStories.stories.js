@@ -28,7 +28,13 @@ const STORIES = [
 /* IStories */
 const IStoriesStory = storiesOf('IStories', module);
 IStoriesStory.addDecorator(withKnobs);
-IStoriesStory.add('default', () => {
+IStoriesStory.add('Version 1', () => {
+  return <IStories stories={STORIES} />;
+});
+IStoriesStory.add('Version 2', () => {
+  return <IStoriesV2 stories={STORIES} />;
+});
+IStoriesStory.add('Version 3', () => {
   return <IStoriesV3 stories={STORIES} />;
 });
 
