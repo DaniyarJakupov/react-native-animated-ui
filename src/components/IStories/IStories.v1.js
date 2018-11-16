@@ -38,6 +38,7 @@ class IStories extends React.Component<Props, State> {
       extrapolate: 'clamp'
     });
 
+    // Rotation calculated based on Perspective
     const rotateY = x.interpolate({
       inputRange,
       outputRange: [`${A}rad`, `-${A}rad`],
