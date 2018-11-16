@@ -8,7 +8,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "prestorybook": "rnstl",
-    "storybook": "storybook start -p 7007",
+    "storybook": "storybook start -p 7007 --skip-packager | react-native start --projectRoot storybook",
     "release": "np --yolo --no-yarn"
   },
   "dependencies": {
@@ -17,25 +17,30 @@
     "react-native-svg": "6.0.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "3.2.15",
-    "@storybook/addon-knobs": "3.2.15",
-    "@storybook/addon-links": "3.2.15",
-    "@storybook/react-native": "3.2.15",
-    "babel-jest": "22.0.4",
-    "babel-preset-react-native": "4.0.0",
+    "@babel/core": "7.1.0",
+    "@babel/runtime": "7.0.0",
+    "@storybook/addon-actions": "3.4.11",
+    "@storybook/addon-knobs": "3.4.11",
+    "@storybook/addon-links": "3.4.11",
+    "@storybook/addons": "3.4.11",
+    "@storybook/react-native": "3.4.11",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "23.6.0",
+    "babel-plugin-styled-components": "1.8.0",
     "eslint-config-rallycoding": "^3.2.0",
     "flow-bin": "0.57.3",
-    "jest": "22.0.4",
-    "prop-types": "^15.6.0",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
-    "react-native": "0.50.3",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.45.0",
+    "prop-types": "15.6.0",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
+    "react-native": "0.57.1",
     "react-native-storybook-loader": "1.6.0",
-    "react-test-renderer": "16.0.0"
+    "react-test-renderer": "16.5.0"
   },
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-native": ">=0.50.0"
+    "react": ">=16.5.0",
+    "react-native": ">=0.57.1"
   },
   "jest": {
     "preset": "react-native"
