@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react-native';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import IStories from './IStories.v1';
+import IStoriesV2 from './IStories.v2';
 import IStoriesV3 from './IStories.v3';
 
 const STORIES = [
