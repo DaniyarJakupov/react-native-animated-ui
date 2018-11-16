@@ -12,8 +12,9 @@
     "release": "np --yolo --no-yarn"
   },
   "dependencies": {
-    "react-native-svg": "6.0.0",
-    "ramda": "0.25.0"
+    "ramda": "0.25.0",
+    "react-native-reanimated": "^1.0.0-alpha.10",
+    "react-native-svg": "6.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.2.15",
