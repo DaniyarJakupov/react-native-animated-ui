@@ -10,6 +10,7 @@ function loadStories() {
   require('../src/components/FlipCard/FlipCard.stories.js');
   require('../src/components/Heart/Heart.stories.js');
   require('../src/components/HorizontalParallax/HorizontalParallax.stories.js');
+  require('../src/components/IStories/IStories.stories.js');
   require('../src/components/Icon/Icon.stories.js');
   require('../src/components/SwipeDeck/SwipeDeck.stories.js');
   
@@ -21,6 +22,7 @@ const stories = [
   '../src/components/FlipCard/FlipCard.stories.js',
   '../src/components/Heart/Heart.stories.js',
   '../src/components/HorizontalParallax/HorizontalParallax.stories.js',
+  '../src/components/IStories/IStories.stories.js',
   '../src/components/Icon/Icon.stories.js',
   '../src/components/SwipeDeck/SwipeDeck.stories.js',
   
