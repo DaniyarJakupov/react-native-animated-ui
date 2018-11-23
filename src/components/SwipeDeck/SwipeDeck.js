@@ -15,6 +15,14 @@ type Props = {
 };
 
 export default class App extends Component<Props, State> {
+  position: Animated.Value;
+  rotate: Animated.Value;
+  rotateAndTranslate: Animated.Value;
+  likeOpacity: Animated.Value;
+  dislikeOpacity: Animated.Value;
+  nextCardOpacity: Animated.Value;
+  nextCardScale: Animated.Value;
+
   constructor(props: Props) {
     super(props);
 
@@ -24,7 +32,7 @@ export default class App extends Component<Props, State> {
     this.position = new Animated.ValueXY();
 
     this.PanResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (evt, gestureState) => {
         this.position.setValue({ x: gestureState.dx, y: 0 });
       },

@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,22 @@ import {
 
 const { width, height } = Dimensions.get('window');
 
-class ImageContainer extends Component {
+type Props = {
+  onFocused: Function,
+  image: string,
+  title: string,
+  translateX: Animated.Value
+};
+
+type State = {
+  scale: Animated.Value
+};
+
+class ImageContainer extends React.Component<Props, State> {
+  bgFadeInterpolate: Animated.Value;
+  textFade: Animated.Value;
+  calloutTranslate: Animated.Value;
+
   state = {
     scale: new Animated.Value(1)
   };
@@ -48,8 +63,8 @@ class ImageContainer extends Component {
     }).start(() => this.props.onFocused(true));
   };
 
-  render() {
-    const { image, title, translateX, onFocused, focused } = this.props;
+  render(): React.Node {
+    const { image, title, translateX } = this.props;
 
     const animatedStyle = {
       transform: [{ translateX }, { scale: this.state.scale }]

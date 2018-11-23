@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, Animated } from 'react-native';
 import ImageContainer from './ImageContainer';
 
@@ -9,16 +9,17 @@ type Props = {
   images: Array<{ image: string, title: string }>
 };
 type State = {
-  animatedScroll: number
+  animatedScroll: Animated.Value,
+  scrollEnabled: boolean
 };
 
-class HorizontalParallax extends Component<Props, State> {
+class HorizontalParallax extends React.Component<Props, State> {
   state = {
     animatedScroll: new Animated.Value(0),
     scrollEnabled: true
   };
 
-  getInterpolate = (animatedScroll, i) => {
+  getInterpolate = (animatedScroll: Animated.Value, i: number) => {
     // [translateX for the Image before it is swiped, when we are at the Image, after we swiped away]
     const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
     const outputRange = i === 0 ? [0, 0, 150] : [-300, 0, 150];
@@ -30,15 +31,15 @@ class HorizontalParallax extends Component<Props, State> {
     });
   };
 
-  getSeparator = i => {
+  getSeparator = (i: number) => {
     return <View key={i} style={[styles.separator, { left: (i - 1) * width - 2.5 }]} />;
   };
 
-  handleFocus = focused => {
+  handleFocus = (focused: boolean) => {
     this.setState({ scrollEnabled: !focused });
   };
 
-  render() {
+  render(): React.Node {
     const { images } = this.props;
     return (
       <View style={styles.container}>
@@ -62,14 +63,14 @@ class HorizontalParallax extends Component<Props, State> {
               <ImageContainer
                 key={image.title}
                 {...image}
-                translateX={this.getInterpolate(this.state.animatedScroll, i, images.length)}
+                translateX={this.getInterpolate(this.state.animatedScroll, i)}
                 onFocused={this.handleFocus}
                 focused={!this.state.scrollEnabled}
               />
             );
           })}
 
-          {Array(...{ length: images.length + 1 }).map((_, i) => this.getSeparator(i))}
+          {/* {Array(...{ length: images.length + 1 }).map((_, i) => this.getSeparator(i))} */}
         </ScrollView>
       </View>
     );
