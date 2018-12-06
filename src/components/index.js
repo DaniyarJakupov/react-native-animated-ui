@@ -5,7 +5,18 @@ import FlipCard from './FlipCard';
 import Heart from './Heart';
 import HorizontalParallax from './HorizontalParallax';
 import Icon from './Icon';
-import SwipeDeck from './SwipeDeck';
 import IStories from './IStories';
+import ScrollDeck from './ScrollDeck';
+import SwipeDeck from './SwipeDeck';
 
-export { ActionButton, Button, HorizontalParallax, FlipCard, Heart, Icon, SwipeDeck, IStories };
+export {
+  ActionButton,
+  Button,
+  FlipCard,
+  Heart,
+  HorizontalParallax,
+  Icon,
+  IStories,
+  ScrollDeck,
+  SwipeDeck
+};
